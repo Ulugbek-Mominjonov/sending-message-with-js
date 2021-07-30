@@ -93,14 +93,11 @@ body {
   position: absolute;
   width: 18px;
   height: 18px;
-  top: -5px;
-  right: -5px;
   padding: 0;
 
   visibility: hidden;
 
   background-color: #ffffff;
-  background-image: url("img/icon-cross.svg");
   background-repeat: no-repeat;
   background-position: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
@@ -112,6 +109,16 @@ body {
   user-select: none;
   touch-action: manipulation;
   cursor: pointer;
+}
+.chat-message-button--delete {
+  top: -5px;
+  right: -5px;
+  background-image: url("img/icon-cross.svg");
+}
+.chat-message-button--edit {
+  bottom: -5px;
+  right: -5px;
+  background-image: url("img/icons8-edit.svg");
 }
 
 .chat-message + .chat-message {

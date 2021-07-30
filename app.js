@@ -3,24 +3,36 @@ let chatMessageTemplate = elTemplate.querySelector('.chat-message');
 let chatContent = document.querySelector('.chat-content');
 let chatForm= document.querySelector('.chat-form');
 let chatInput = chatForm.querySelector('.chat-form-input');
-
+let submitBtn = chatForm.querySelector('.chat-form-button');
+let editText;
 chatForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   let chatValue =  chatInput.value;
-  let clonedChatMessageTemplate = chatMessageTemplate.cloneNode(true);
-  let elChatText = clonedChatMessageTemplate.querySelector('.chat-message-text');
-  elChatText.textContent = chatValue;
+  if(submitBtn.textContent == 'Send message'){
+    let clonedChatMessageTemplate = chatMessageTemplate.cloneNode(true);
+    let elChatText = clonedChatMessageTemplate.querySelector('.chat-message-text');
+    elChatText.textContent = chatValue;
 
-  deleteMessage(clonedChatMessageTemplate);
-  chatContent.appendChild(clonedChatMessageTemplate);
+    assignEvent(clonedChatMessageTemplate);
+    chatContent.appendChild(clonedChatMessageTemplate);
+  } else{
+    editText.textContent = chatValue;
+    submitBtn.textContent = "Send message";
+  }
 
   chatInput.value = "";
 })
 
-let deleteMessage = function (item) {
-  let deleteBtn = item.querySelector('.chat-message-button');
+let assignEvent = function (item) {
+  let deleteBtn = item.querySelector('.chat-message-button--delete');
+  let editBtn = item.querySelector('.chat-message-button--edit')
   deleteBtn.addEventListener('click', () => {
       item.remove();
+  })
+  editBtn.addEventListener('click', () => {
+    editText = item.querySelector('.chat-message-text');
+    chatInput.value = editText.textContent;
+    submitBtn.textContent = "Edit message";
   })
 }
 
